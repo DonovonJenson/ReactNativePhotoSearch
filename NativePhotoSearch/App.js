@@ -5,6 +5,8 @@
  */
 
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReduxers, compose} from 'redux';
 import {
   Platform,
   StyleSheet,
