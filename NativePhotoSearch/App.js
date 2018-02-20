@@ -6,23 +6,27 @@
 
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReduxers, compose} from 'redux';
+import { createStore, applyMiddleware, compose} from 'redux';
 import {
   Platform,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import thunk from 'redux-thunk';
+import reducer from './reducers/reducers.js'
+
+const store = createStore(reducer, compose(
+  applyMiddleware(thunk)
+));
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.instructions}>
-          Howdy dewDee
-        </Text>
-      </View>
+      <Provider store={store}>
+        <Text style={styles.welcome}> Sup </Text>
+      </Provider>
     );
   }
 }
@@ -45,3 +49,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+
+
+
