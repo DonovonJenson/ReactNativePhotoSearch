@@ -16,6 +16,8 @@ import {
 import thunk from 'redux-thunk';
 import reducer from './reducers/reducers.js'
 
+import Searchbox from './components/searchbox.js'
+
 const store = createStore(reducer, compose(
   applyMiddleware(thunk)
 ));
@@ -25,7 +27,10 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Provider store={store}>
-        <Text style={styles.welcome}> Sup </Text>
+        <View style={styles.container}> 
+          <Text style={styles.title}> PixaBay </Text>
+          <Searchbox/>
+        </View>
       </Provider>
     );
   }
@@ -34,13 +39,12 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  title: {
+    paddingTop: 15,
     fontSize: 20,
-    textAlign: 'center',
     margin: 10,
   },
   instructions: {
