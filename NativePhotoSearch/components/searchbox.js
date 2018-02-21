@@ -8,6 +8,9 @@ import {
   Button,
 } from 'react-native';
 
+import pixabay from '../secretKey.js';
+import axios from 'axios';
+
 
 export default class Searchbox extends Component {
 
@@ -15,8 +18,11 @@ export default class Searchbox extends Component {
   	super(props)
   }
 
-  dofunction(){
-  	console.log('ran')
+  dofunction(query){
+  	axios.get(`https://pixabay.com/api/?key=${pixabay}&q={query}`)
+  	.then((response) =>{
+  		console.log(response.data)
+  	})
   }
 
   render() {
