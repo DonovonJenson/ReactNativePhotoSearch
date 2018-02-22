@@ -1,26 +1,16 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose} from 'redux';
+import { Provider, Connect } from 'react-redux';
+
 import {
   Platform,
   StyleSheet,
   Text,
   View
 } from 'react-native';
-import thunk from 'redux-thunk';
-import reducer from './reducers/reducers.js'
 
 import Searchbox from './components/searchbox.js'
-
-const store = createStore(reducer, compose(
-  applyMiddleware(thunk)
-));
+import configureStore from './configureStore';
+const store = configureStore()
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -53,7 +43,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
 
 
 

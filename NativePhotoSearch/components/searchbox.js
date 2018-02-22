@@ -10,26 +10,24 @@ import {
 
 import pixabay from '../secretKey.js';
 import axios from 'axios';
+import { connect } from 'react-redux'
+import { fetchQueryFromAPI, updateQuery } from '../actions.js'
 
 
-export default class Searchbox extends Component {
+class Searchbox extends Component {
 
   constructor(props){
   	super(props)
   }
 
-  dofunction(query){
-  	axios.get(`https://pixabay.com/api/?key=${pixabay}&q={query}`)
-  	.then((response) =>{
-  		console.log(response.data)
-  	})
-  }
-
   render() {
     return (
     	<View>
-	        <TextInput style={styles.inputBox}/>
-	        <Button color='black' title="Search" onPress={this.dofunction}/> 
+	        <TextInput style={styles.inputBox} onChangeText={(text)=> this.props.update(text)}/>
+	        <Button color='black' title="Search" onPress={ () => this.props.getQuery(this.props.query.currentQuery)}/> 
+	        <Text> {this.props.query.isFetching && 'Searching...'} </Text>
+	        <Text> {this.props.query.currentQuery} </Text>
+	        <Text> {JSON.stringify(this.props.query.queryResults)} </Text>
         </View>
     );
   }
@@ -43,3 +41,18 @@ const styles = StyleSheet.create({
 		borderColor: 'gray',
 	},
 });
+
+function mapStateToProps(state){
+	return {
+		query: state.query
+	}
+}
+
+function mapDispatchToProps(dispatch){
+	return {
+		getQuery: (currentQuery) => dispatch(fetchQueryFromAPI(currentQuery)),
+		update: (currentQuery) => dispatch(updateQuery(currentQuery))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Searchbox)
