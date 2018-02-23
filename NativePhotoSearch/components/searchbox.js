@@ -34,7 +34,7 @@ class Searchbox extends Component {
   	}
 
     return (
-    	<View>
+    	<View style={styles.container}>
 	        <TextInput style={styles.inputBox} onChangeText={(text)=> this.props.update(text)}/>
 	        <Button color='black' title="Search" onPress={ () => this.props.getQuery(this.props.query.currentQuery)}/> 
 	        <Text> {this.props.query.isFetching && 'Searching...'} </Text>
@@ -53,6 +53,11 @@ const styles = StyleSheet.create({
 		borderWidth: 2, 
 		borderColor: 'gray',
 	},
+	container: {
+		flex: 1,
+	    alignItems: 'center',
+	    backgroundColor: '#F5FCFF',
+	}
 });
 
 function mapStateToProps(state){
