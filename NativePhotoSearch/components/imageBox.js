@@ -19,10 +19,11 @@ class ImageBox extends Component {
   }
 
   render() {
+  	console.log(this.props.imageData)
     return (
-    	<View>
-	        <Text> Hello guvna! </Text>
+    	<View style = {styles.photobox}>
 	        <Image style={styles.image}
+	        resizeMode='contain'
  			source={{uri: this.props.imageData.previewURL }}/>
         </View>
     );
@@ -43,7 +44,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(ImageBox)
 
 const styles = StyleSheet.create({
 	image: {
-		height: 200,
-		width: 200,
+		height: 275,
+		width: 275,
+		flex: 1,
+	},
+	photobox: {
+		borderTopWidth: 1,
+		paddingBottom: 1
 	}
 });
