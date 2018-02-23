@@ -6,12 +6,14 @@ import {
   View,
   TextInput,
   Button,
+  ScrollView,
 } from 'react-native';
 
 import pixabay from '../secretKey.js';
 import axios from 'axios';
 import { connect } from 'react-redux'
 import { fetchQueryFromAPI, updateQuery } from '../actions.js'
+import ImageBox from './imageBox.js'
 
 
 class Searchbox extends Component {
@@ -21,13 +23,24 @@ class Searchbox extends Component {
   }
 
   render() {
+
+  	//Finishing this way, but should refactor to smart and dumb components
+  	let resultsArray = []
+  	const images = this.props.query.queryResults.hits
+  	if (images && images.length > 0){
+	  	resultsArray = images.map((imageData) => {
+	  		return <ImageBox key={imageData.id} imageData={imageData}/> 
+	  	})
+  	}
+
     return (
     	<View>
 	        <TextInput style={styles.inputBox} onChangeText={(text)=> this.props.update(text)}/>
 	        <Button color='black' title="Search" onPress={ () => this.props.getQuery(this.props.query.currentQuery)}/> 
 	        <Text> {this.props.query.isFetching && 'Searching...'} </Text>
-	        <Text> {this.props.query.currentQuery} </Text>
-	        <Text> {JSON.stringify(this.props.query.queryResults)} </Text>
+	        <ScrollView>
+	        {resultsArray}
+	        </ScrollView>
         </View>
     );
   }
