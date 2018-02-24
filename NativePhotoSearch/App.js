@@ -1,31 +1,31 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose} from 'redux';
+import { Provider, Connect } from 'react-redux';
+
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  NavigatorIOS,
 } from 'react-native';
-import thunk from 'redux-thunk';
-import reducer from './reducers/reducers.js'
 
-const store = createStore(reducer, compose(
-  applyMiddleware(thunk)
-));
+import Searchbox from './components/searchbox.js'
+import configureStore from './configureStore';
+const store = configureStore()
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
       <Provider store={store}>
-        <Text style={styles.welcome}> Sup </Text>
+        <View style={styles.title}> 
+          <NavigatorIOS
+            style={{flex:1}}
+            initialRoute={{
+              component: Searchbox,
+              title: 'Search'
+            }}/> 
+        </View>
       </Provider>
     );
   }
@@ -34,14 +34,12 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
+  title: {
+    paddingTop: 15,
     margin: 10,
+    flex: 1,
   },
   instructions: {
     textAlign: 'center',
@@ -49,7 +47,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
 
 
 
