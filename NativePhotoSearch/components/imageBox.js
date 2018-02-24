@@ -28,9 +28,7 @@ class ImageBox extends Component {
   	this.props.navigator.push({
   		title: 'Photo Details',
   		component: detailView,
-  		passProps: {
-  			pushEvent: imageData
-  		}
+  		passProps: imageData
   	})
   }
 
