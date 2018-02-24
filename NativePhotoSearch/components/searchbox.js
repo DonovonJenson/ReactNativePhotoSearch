@@ -29,7 +29,7 @@ class Searchbox extends Component {
   	const images = this.props.query.queryResults.hits
   	if (images && images.length > 0){
 	  	resultsArray = images.map((imageData) => {
-	  		return <ImageBox key={imageData.id} imageData={imageData}/> 
+	  		return <ImageBox key={imageData.id} imageData={imageData} navigator={this.props.navigator}/> 
 	  	})
   	}
 
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 		width: 150,
 		borderWidth: 2, 
 		borderColor: 'gray',
+		marginTop: 50,
 	},
 	container: {
 		flex: 1,

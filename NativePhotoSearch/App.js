@@ -5,7 +5,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  NavigatorIOS,
 } from 'react-native';
 
 import Searchbox from './components/searchbox.js'
@@ -17,9 +18,13 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}> 
-          <Text style={styles.title}> PixaBay </Text>
-          <Searchbox/>
+        <View style={styles.title}> 
+          <NavigatorIOS
+            style={{flex:1}}
+            initialRoute={{
+              component: Searchbox,
+              title: 'Search'
+            }}/> 
         </View>
       </Provider>
     );
@@ -29,13 +34,12 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   title: {
     paddingTop: 15,
-    fontSize: 20,
     margin: 10,
+    flex: 1,
   },
   instructions: {
     textAlign: 'center',
