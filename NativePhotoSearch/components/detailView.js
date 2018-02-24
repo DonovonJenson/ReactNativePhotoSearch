@@ -20,12 +20,15 @@ class ImageBox extends Component {
 
 
   render() {
-  	console.log(this.props.previewURL)
+  	console.log(this.props)
     return (
-    	<View style = {{flex: 1, alignItems: 'center'}}>
+    	<View style = {styles.container}>
     		<Image style={styles.image}
 	        resizeMode='contain'
  			source={{uri: this.props.previewURL }}/>
+ 			<Text style={styles.text}> User: {this.props.user}</Text>
+ 			<Text style={styles.text}> Tags: {this.props.tags}</Text>
+ 			<Text style={styles.text}> Resolution: {this.props.imageHeight}x{this.props.imageWidth}</Text>
         </View>
     );
   }
@@ -47,6 +50,16 @@ const styles = StyleSheet.create({
 	image: {
 		height: 275,
 		width: 275,
-		flex: 1,
+	},
+	container: {
+		flex: 1, 
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	text: {
+		fontSize: 20,
+		margin: 1,
+		paddingBottom: 3,
+		borderBottomWidth: 1,
 	},
 });
